@@ -2,22 +2,7 @@ const highscoreList = document.querySelector("#highscore-list");
 
 // const highscore = [];
 
-const highscoreJson = `
-[
-    {
-        "name":"Niklas",
-        "score": 10
-    },
-    {
-        "name":"Banarne",
-        "score": 0
-    },
-    {
-        "name":"Trazan",
-        "score": 5
-    }
-]
-`;
+const highscoreJson = localStorage.getItem("highscore");
 
 populateHighscore();
 
@@ -28,8 +13,12 @@ function populateHighscore() {
 
   for (const entry of scoreEntries) {
     const li = document.createElement("li");
-    li.classList.add("list-group-item", "bg-dark", "text-warning");
-    li.innerText = `${entry.name} ${entry.score}`;
+    li.classList.add("list-group-item", "bg-dark", "text-warning", "fw-bold");
+    const dt = new Date(entry.time);
+
+    li.innerText = `${entry.name} ${
+      entry.score
+    } ${dt.getHours()}:${dt.getMinutes()}`;
     highscoreList.append(li);
   }
 }
