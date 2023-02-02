@@ -31,6 +31,7 @@ for (const question of questions) {
   cardFooter.classList.add("card-footer", "bg-info");
   trueButton.classList.add(
     "btn",
+    "mx-1",
     "btn-success",
     "border",
     "border-2",
@@ -38,6 +39,7 @@ for (const question of questions) {
   );
   falseButton.classList.add(
     "btn",
+    "mx-1",
     "btn-danger",
     "border",
     "border-2",
