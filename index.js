@@ -16,9 +16,9 @@ function populateHighscore() {
     li.classList.add("list-group-item", "bg-dark", "text-warning", "fw-bold");
     const dt = new Date(entry.time);
 
-    li.innerText = `${entry.name} ${
-      entry.score
-    } ${dt.getHours()}:${dt.getMinutes()}`;
+    li.innerText = `${entry.name} ${entry.score} ${dt.toLocaleTimeString(
+      "SWE"
+    )}`;
     highscoreList.append(li);
   }
 }
