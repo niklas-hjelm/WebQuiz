@@ -122,13 +122,12 @@ function checkAllQuestionsAnswered() {
     const name = window.prompt("give me your name!");
     const player = new PlayerScore(name, score);
     const highscoreJson = localStorage.getItem("highscore");
-    if (highscoreJson.charAt(0) === "[") {
+    if (highscoreJson) {
       console.log(highscoreJson);
       const highscore = JSON.parse(localStorage.getItem("highscore"));
       highscore.push(player);
       localStorage.setItem("highscore", JSON.stringify(highscore));
     } else {
-      console.log("hej2");
       const highscore = [];
       highscore.push(player);
       localStorage.setItem("highscore", JSON.stringify(highscore));
