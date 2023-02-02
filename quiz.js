@@ -9,21 +9,30 @@ const qList = document.querySelector("#questions");
 const scoreDisplay = document.querySelector("#score");
 let score = 0;
 
-function startButtonClick() {
+async function startButtonClick() {
+  score = 0;
+  scoreDisplay.innerText = score;
   //questions.length = 0;
-  questions.splice(0, questions.length);
-
-  questions.push(
-    new Question("Gillar Niklas kaffe?", "True"),
-    new Question("Är jorden platt?", "False"),
-    new Question("Är programmering kul?", "True")
+  const url = new URL(
+    `https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=boolean`
   );
 
-  while (qList.childElementCount > 0) {
-    qList.children[0].remove();
-  }
+  const response = await fetch(url);
+  if (response.status === 200) {
+    const jsonResponse = await response.json();
+    console.log(jsonResponse);
+    questions.splice(0, questions.length);
 
-  displayQuestions();
+    for (const result of jsonResponse.results) {
+      questions.push(new Question(result.question, result.correct_answer));
+    }
+
+    while (qList.childElementCount > 0) {
+      qList.children[0].remove();
+    }
+
+    displayQuestions();
+  }
 }
 
 function displayQuestions() {
