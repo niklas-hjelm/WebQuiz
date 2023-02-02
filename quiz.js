@@ -59,18 +59,3 @@ for (const question of questions) {
   card.append(cardHeader, cardBody, cardFooter);
   qList.append(card);
 }
-//   const html = `<div class="card border-0 mb-2">
-//       <div class="card-header bg-info fw-bold">1</div>
-//       <div class="card-body bg-dark text-warning">
-//         <h4 class="card-text">${question.statement}</h4>
-//       </div>
-//       <div class="card-footer bg-info">
-//         <button class="btn btn-success border border-2 border-dark">
-//           True
-//         </button>
-//         <button class="btn btn-danger border border-2 border-dark">
-//           False
-//         </button>
-//       </div>
-//     </div>`;
-//   qList.innerHTML += html;
