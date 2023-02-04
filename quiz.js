@@ -12,11 +12,38 @@ class PlayerScore {
   }
 }
 
+const difficulties = ["easy", "medium", "hard"];
 const questions = [];
+
 const qList = document.querySelector("#questions");
 const scoreDisplay = document.querySelector("#score");
+const difficultySelection = document.querySelector("#difficultySelection");
+
 let score = 0;
 let questionsAnswered = 0;
+let selectedDifficulty = "easy";
+
+setupDifficultyButtons();
+
+function setupDifficultyButtons() {
+  for (const diff of difficulties) {
+    const btn = document.createElement("button");
+    btn.id = `${diff}-button`;
+    btn.classList.add("btn", "btn-info", "text-dark");
+    btn.textContent = diff;
+
+    btn.onclick = () => {
+      for (const selection of difficultySelection.children) {
+        selection.classList.remove("active", "fw-bold");
+      }
+      btn.classList.add("active", "fw-bold");
+      selectedDifficulty = diff;
+    };
+
+    difficultySelection.append(btn);
+  }
+  document.querySelector("#easy-but ton").classList.add("active", "fw-bold");
+}
 
 async function startButtonClick() {
   score = 0;
@@ -24,7 +51,7 @@ async function startButtonClick() {
   scoreDisplay.innerText = score;
   //questions.length = 0;
   const url = new URL(
-    `https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=boolean`
+    `https://opentdb.com/api.php?amount=10&difficulty=${selectedDifficulty}&type=boolean&encode=url3986`
   );
 
   const response = await fetch(url);
@@ -33,7 +60,9 @@ async function startButtonClick() {
     questions.splice(0, questions.length);
 
     for (const result of jsonResponse.results) {
-      questions.push(new Question(result.question, result.correct_answer));
+      questions.push(
+        new Question(decodeURIComponent(result.question), result.correct_answer)
+      );
     }
 
     while (qList.childElementCount > 0) {
