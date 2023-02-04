@@ -42,7 +42,7 @@ function setupDifficultyButtons() {
 
     difficultySelection.append(btn);
   }
-  document.querySelector("#easy-but ton").classList.add("active", "fw-bold");
+  document.querySelector("#easy-button").classList.add("active", "fw-bold");
 }
 
 async function startButtonClick() {
